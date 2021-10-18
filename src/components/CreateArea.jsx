@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React , {useEffect , useState} from "react";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Fab from '@mui/material/Fab';
 import Zoom from '@mui/material/Zoom';
@@ -6,8 +6,12 @@ import Zoom from '@mui/material/Zoom';
 function CreateArea(props) {
     const [note, setNote] = useState({
         title: "",
-        content: ""
+        content: "",
+        id: ""
     });
+    useEffect(()=> {
+        console.log('EFFECT')
+    }, [note]);
     const [small, setFull] = useState(true);
 
     function handleChange(event) {
@@ -16,18 +20,21 @@ function CreateArea(props) {
         setNote(prevNote => {
             return {
                 ...prevNote,
-                [name]: value
+                [name]: value,
+
             };
         });
     }
 
     function submitNote(event) {
+
         props.onAdd(note);
-        setNote({
-            title: "",
-            content: ""
-        });
         event.preventDefault();
+            setNote({
+                title: "",
+                content: "",
+                id: ""
+            });
     }
 
     function toggleFull() {
@@ -41,7 +48,7 @@ function CreateArea(props) {
                     <textarea
                         name="content"
                         onClick={toggleFull}
-                        value={note.content}
+
                         placeholder="Take a note..."
                         rows="1"
                     />

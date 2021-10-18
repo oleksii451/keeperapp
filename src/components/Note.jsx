@@ -1,7 +1,8 @@
-import React from "react";
+import React , {useEffect} from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function Note(props) {
+
     function handleClick() {
         props.onDelete(props.id);
     }
